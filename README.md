@@ -18,24 +18,24 @@
 
 ### 1. حساب أعلى معدل نمو سنوي
 لقياس أقصى قفزة في التغير السنوي:
-```
-[أعلى معدل نمو سنوي] = 
-MAX('SHEET 1'[(%) معدل التغير السنوي]) / 100
+```[Max Annual Growth Rate] = 
+MAX('SHEET 1'[Annual Change Rate (%)]) / 100
 
 ```
 ### 2. تحديد منطقة أدنى معدل نمو 
 استخدام متغيرات لتحديد المنطقة الأقل أداءً بناءً على سياق التصفية:
 ```
-[منطقة أدنى معدل نمو] = 
-VAR MinRate = MINX(ALL('SHEET 1'), 'SHEET 1'[(%) معدل التغير السنوي])
+[Region with Lowest Growth Rate] = 
+VAR MinRate = MINX(ALL('SHEET 1'), 'SHEET 1'[Annual Change Rate (%)])
 RETURN
 CALCULATE(
-    SELECTEDVALUE('SHEET 1'[المنطقة / المدينة]),
+    SELECTEDVALUE('SHEET 1'[Region / City]),
     FILTER(
         ALL('SHEET 1'),
-        'SHEET 1'[(%) معدل التغير السنوي] = MinRate
+        'SHEET 1'[Annual Change Rate (%)] = MinRate
     )
 )
+
 ```
 ### 3. تحليل قائمة الأحياء الخمسة الأعلى سعراً (Top 5)
 استخراج قائمة مرتبة تنازلياً لأغلى 5 أحياء من حيث متوسط سعر المتر المربع لتحديد اتجاهات السوق:
@@ -45,9 +45,10 @@ TOP5 =
 TOPN(
     5,
     'SHEET 1',
-    'SHEET 1'[متوسط السعر (ر.س/م²)],
+    'SHEET 1'[Average Price (SAR/m²)],
     DESC
 )
+
 
 ```
 
