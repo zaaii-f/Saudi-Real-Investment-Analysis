@@ -1,29 +1,30 @@
-# لوحة تحليل استراتيجي لمؤشرات الاستثمار العقاري عبر Power BI و DAX 📊
+# Strategic Analysis Dashboard for Real Estate Investment Indicators using Power BI and DAX 📊
 
-> **ملاحظة:** تم بناء هذا المشروع باستخدام **بيانات افتراضية (Synthetic Data)** لغرض عرض المهارات التحليلية وبناء النماذج الحسابية، ولا يمثل أرقاماً فعلية.
+> **Note:** This project was built using **synthetic data** to showcase analytical skills and calculation modeling. It does not represent actual figures.
 
 ---
 
-## 🌐 شرح المشروع (Project Description)
-مشروع تحليلي يهدف إلى دراسة السوق العقاري في المملكة العربية السعودية من خلال تتبع مؤشرات الأداء الرئيسية (KPIs). يركز العمل على تحليل توزيع القطاعات ومراقبة تغير الأسعار ومعدلات النمو السنوي في مختلف المناطق والأحياء، لتوفير رؤية واضحة حول اتجاهات السوق الاستثمارية.
+## 🌐 Project Description
+An analytical project that studies the real estate market in Saudi Arabia by tracking key performance indicators (KPIs). The work focuses on analyzing the distribution of property sectors, monitoring price changes, and measuring annual growth rates across regions and neighborhoods, to give a clear view of investment market trends.
 
-## 🛠️ الأدوات المستخدمة (Tools Used)
-- **Power BI:** لتصميم واجهات العرض التفاعلية وبناء لوحات التحكم.
-- **DAX:** لبناء المعادلات الحسابية المتقدمة التي تعالج البيانات وتستخرج المؤشرات.
-- **Power Query:** لتنظيف وهيكلة البيانات قبل عملية التحليل.
-- **Excel:** المصدر الأساسي للبيانات الافتراضية المستخدمة.
+## 🛠️ Tools Used
+- **Power BI:** Designing interactive report pages and building dashboards.
+- **DAX:** Building advanced calculations that process the data and extract the indicators.
+- **Power Query:** Cleaning and structuring the data before analysis.
+- **Excel:** The main source of the synthetic data used.
 
-## 🧠 النماذج الحسابية (DAX Measures)
-تم بناء منطق العمل البرمجي باستخدام لغة DAX لاستخراج أدق التفاصيل، إليكم بعض الأمثلة:
+## 🧠 Calculation Models (DAX Measures)
+The business logic was built with DAX to extract precise details. Here are a few examples:
 
-### 1. حساب أعلى معدل نمو سنوي
-لقياس أقصى قفزة في التغير السنوي:
-```[Max Annual Growth Rate] = 
-MAX('SHEET 1'[Annual Change Rate (%)]) / 100
-
+### 1. Highest Annual Growth Rate
+Measures the largest jump in annual change:
 ```
-### 2. تحديد منطقة أدنى معدل نمو 
-استخدام متغيرات لتحديد المنطقة الأقل أداءً بناءً على سياق التصفية:
+[Max Annual Growth Rate] = 
+MAX('SHEET 1'[Annual Change Rate (%)]) / 100
+```
+
+### 2. Region with the Lowest Growth Rate
+Uses variables to identify the lowest-performing region based on the filter context:
 ```
 [Region with Lowest Growth Rate] = 
 VAR MinRate = MINX(ALL('SHEET 1'), 'SHEET 1'[Annual Change Rate (%)])
@@ -35,11 +36,10 @@ CALCULATE(
         'SHEET 1'[Annual Change Rate (%)] = MinRate
     )
 )
-
 ```
-### 3. تحليل قائمة الأحياء الخمسة الأعلى سعراً (Top 5)
-استخراج قائمة مرتبة تنازلياً لأغلى 5 أحياء من حيث متوسط سعر المتر المربع لتحديد اتجاهات السوق:
 
+### 3. Top 5 Neighborhoods by Price
+Extracts a descending list of the 5 most expensive neighborhoods by average price per square meter, to identify market trends:
 ```
 TOP5 = 
 TOPN(
@@ -48,16 +48,15 @@ TOPN(
     'SHEET 1'[Average Price (SAR/m²)],
     DESC
 )
-
-
 ```
 
-## 💡 نتائج التحليل الرئيسية (Insights)
- * تحديد القطاع السكني كأكبر حصة من حيث توزيع العقارات بنسبة 62.35%.
- * رصد المناطق التي سجلت أعلى معدل نمو سنوي بنسبة 7.65% (مثل حي النخيل).
- * توضيح تباين الأسعار بين المدن الكبرى لدعم قرارات التمركز الاستثماري.
-## 🖼️ معاينة العمل (Dashboard Preview)
-(https://github.com/user-attachments/assets/e9c09007-4bee-40b7-b6de-4e84ff2b7c0e)
+## 💡 Key Insights
+ * The residential sector holds the largest share of the property distribution, at 62.35%.
+ * Identified the areas with the highest annual growth rate, at 7.65% (for example, Al Nakheel neighborhood).
+ * Highlighted the price gap between major cities to support investment positioning decisions.
 
-## 📁 ملف البيانات 
-[📁 تحميل ملف البيانات العقارية (Excel](realestate_data.xlsx)
+## 🖼️ Dashboard Preview
+![Dashboard Preview](https://github.com/user-attachments/assets/e9c09007-4bee-40b7-b6de-4e84ff2b7c0e)
+
+## 📁 Data File
+[📁 Download the real estate data file (Excel)](realestate_data.xlsx)
